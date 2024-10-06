@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Runtime.CompilerServices;
 
 namespace Murkach
 {
@@ -18,7 +13,11 @@ namespace Murkach
             char[] englishLetters = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
                                                  'y', 'z' };
 
-            string newText = "";
+            char[] russianUpperLetters = new char[] { 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц',
+                                                      'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я' };
+
+            char[] englishUpperLetters = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 
+                                                      'X', 'Y', 'Z' };
 
             Console.WriteLine("Вас приветствует программа \"Шифр Егорыча\", работающая по алгоритмам \"Цезаря\".");
             Console.WriteLine("You are welcomed by the program \"Yegorych's Cipher\", which works according to the algorithms of \"Caesar\".\n");
@@ -31,24 +30,42 @@ namespace Murkach
             Console.WriteLine("How many characters do you want to move the phrase by? ");
             int step = Convert.ToInt32(Console.ReadLine());
 
+            string newText = "";
+
             for (int i = 0; i < text.Length; i++)
             {
                 if (russianLetters.Contains(text[i]))
                 {
-                    int newWord = Array.IndexOf(russianLetters, text[i]) + step;
-                    while (newWord >= russianLetters.Length)
+                    int newLetter = Array.IndexOf(russianLetters, text[i]) + step;
+                    while (newLetter >= russianLetters.Length)
                     {
-                        newWord -= russianLetters.Length;
+                        newLetter -= russianLetters.Length;
                     }
-                    newText += russianLetters[newWord];
+                    newText += russianLetters[newLetter];
                 } else if (englishLetters.Contains(text[i]))
                 {
-                    int newWord = Array.IndexOf(englishLetters, text[i]) + step;
-                    while (newWord >= englishLetters.Length)
+                    int newLetter = Array.IndexOf(englishLetters, text[i]) + step;
+                    while (newLetter >= englishLetters.Length)
                     {
-                        newWord -= englishLetters.Length;
+                        newLetter -= englishLetters.Length;
                     }
-                    newText += englishLetters[newWord];
+                    newText += englishLetters[newLetter];
+                } else if (russianUpperLetters.Contains(text[i]))
+                {
+                    int newLetter = Array.IndexOf(russianUpperLetters, text[i]) + step;
+                    while (newLetter >= russianUpperLetters.Length)
+                    {
+                        newLetter -= russianUpperLetters.Length;
+                    }
+                    newText += russianUpperLetters[newLetter];
+                } else if (englishUpperLetters.Contains(text[i]))
+                {
+                    int newLetter = Array.IndexOf(englishUpperLetters, text[i]) + step;
+                    while (newLetter >= englishUpperLetters.Length)
+                    {
+                        newLetter -= englishUpperLetters.Length;
+                    }
+                    newText += englishUpperLetters[newLetter];
                 }
                 else
                 {
